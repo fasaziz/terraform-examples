@@ -1,0 +1,223 @@
+PS C:\Code\er-terraform\for_caller> terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.express_route.azurerm_express_route_circuit.circuitname["circuit_one"] will be created
+  + resource "azurerm_express_route_circuit" "circuitname" {
+      + allow_classic_operations            = false
+      + bandwidth_in_mbps                   = 200
+      + id                                  = (known after apply)
+      + location                            = "uksouth"
+      + name                                = "fii-prd-azer-spt-central-chicago-1"
+      + peering_location                    = "Chicago"
+      + resource_group_name                 = (known after apply)
+      + service_key                         = (sensitive value)
+      + service_provider_name               = "Level 3 Communications - Exchange"
+      + service_provider_provisioning_state = (known after apply)
+
+      + sku {
+          + family = "MeteredData"
+          + tier   = "Standard"
+        }
+    }
+
+  # module.express_route.azurerm_express_route_circuit_peering.peering["ms_peering"] will be created
+  + resource "azurerm_express_route_circuit_peering" "peering" {
+      + azure_asn                     = (known after apply)
+      + express_route_circuit_name    = "test"
+      + gateway_manager_etag          = (known after apply)
+      + id                            = (known after apply)
+      + ipv4_enabled                  = true
+      + peer_asn                      = 397991
+      + peering_type                  = "MicrosoftPeering"
+      + primary_azure_port            = (known after apply)
+      + primary_peer_address_prefix   = "162.110.22.120/30"
+      + resource_group_name           = (known after apply)
+      + route_filter_id               = (known after apply)
+      + secondary_azure_port          = (known after apply)
+      + secondary_peer_address_prefix = "162.110.22.124/30"
+      + vlan_id                       = 70
+
+      + microsoft_peering_config {
+          + advertised_communities     = [
+              + "12076:52004",
+              + "12076:54004",
+              + "12076:52005",
+              + "12076:54005",
+              + "12076:52009",
+              + "12076:54009",
+              + "12076:53005",
+              + "12076:53004",
+              + "12076:53009",
+              + "12076:5060",
+              + "12076:5050",
+            ]
+          + advertised_public_prefixes = [
+              + "162.110.22.116/30",
+            ]
+          + customer_asn               = 397991
+          + routing_registry_name      = "ARIN"
+        }
+    }
+
+  # module.express_route.azurerm_express_route_circuit_peering.peering["private_peering"] will be created
+  + resource "azurerm_express_route_circuit_peering" "peering" {
+      + azure_asn                     = (known after apply)
+      + express_route_circuit_name    = "test"
+      + gateway_manager_etag          = (known after apply)
+      + id                            = (known after apply)
+      + ipv4_enabled                  = true
+      + peer_asn                      = 397991
+      + peering_type                  = "AzurePrivatePeering"
+      + primary_azure_port            = (known after apply)
+      + primary_peer_address_prefix   = "162.110.22.108/30"
+      + resource_group_name           = (known after apply)
+      + secondary_azure_port          = (known after apply)
+      + secondary_peer_address_prefix = "162.110.22.112/30"
+      + vlan_id                       = 170
+
+      + microsoft_peering_config {
+          + advertised_communities     = []
+          + advertised_public_prefixes = []
+          + customer_asn               = 0
+          + routing_registry_name      = "NONE"
+        }
+    }
+
+  # module.express_route.azurerm_public_ip.publicip["fhi-dev-shared-hub-eastus2-expressroute-vng"] will be created
+  + resource "azurerm_public_ip" "publicip" {
+      + allocation_method       = "Static"
+      + ddos_protection_mode    = "VirtualNetworkInherited"
+      + domain_name_label       = "fhi-dev-shared-hub-eastus2-expressroute-vng-pip"
+      + fqdn                    = (known after apply)
+      + id                      = (known after apply)
+      + idle_timeout_in_minutes = 4
+      + ip_address              = (known after apply)
+      + ip_version              = "IPv4"
+      + location                = "eastus2"
+      + name                    = "fhi-dev-shared-hub-eastus2-expressroute-vng-pip"
+      + resource_group_name     = "fhi-dev-shared-hub-rg"
+      + sku                     = "Standard"
+      + sku_tier                = "Regional"
+      + zones                   = [
+          + "1",
+          + "2",
+          + "3",
+        ]
+    }
+
+  # module.express_route.azurerm_public_ip.publicip["fhi-dev-shared-hub-exr-vgw-dr"] will be created
+  + resource "azurerm_public_ip" "publicip" {
+      + allocation_method       = "Static"
+      + ddos_protection_mode    = "VirtualNetworkInherited"
+      + domain_name_label       = "fhi-dev-shared-hub-exr-vgw-azip-dr"
+      + fqdn                    = (known after apply)
+      + id                      = (known after apply)
+      + idle_timeout_in_minutes = 4
+      + ip_address              = (known after apply)
+      + ip_version              = "IPv4"
+      + location                = "centralus"
+      + name                    = "fhi-dev-shared-hub-exr-vgw-azip-dr"
+      + resource_group_name     = "fhi-dev-shared-hubdr-rg"
+      + sku                     = "Standard"
+      + sku_tier                = "Regional"
+      + zones                   = [
+          + "1",
+          + "2",
+          + "3",
+        ]
+    }
+
+  # module.express_route.azurerm_resource_group.example will be created
+  + resource "azurerm_resource_group" "example" {
+      + id       = (known after apply)
+      + location = "uksouth"
+      + name     = "fastest-rg"
+    }
+
+  # module.express_route.azurerm_route_filter.routefilter["circuit_one"] will be created
+  + resource "azurerm_route_filter" "routefilter" {
+      + id                  = (known after apply)
+      + location            = "uksouth"
+      + name                = "fii-prd-azer-spt-centralus-rf"
+      + resource_group_name = (known after apply)
+      + rule                = [
+          + {
+              + access      = "Allow"
+              + communities = [
+                  + "12076:52004",
+                  + "12076:54004",
+                  + "12076:52005",
+                  + "12076:54005",
+                  + "12076:52009",
+                  + "12076:54009",
+                  + "12076:53005",
+                  + "12076:53004",
+                  + "12076:53009",
+                  + "12076:5060",
+                  + "12076:5050",
+                ]
+              + name        = "fii-prd-azer-spt-centralus-rf-rule-bgp-communities"
+              + rule_type   = "Community"
+            },
+        ]
+    }
+
+  # module.express_route.azurerm_virtual_network_gateway.virtualnwg["fhi-dev-shared-hub-eastus2-expressroute-vng"] will be created
+  + resource "azurerm_virtual_network_gateway" "virtualnwg" {
+      + active_active                         = false
+      + bgp_route_translation_for_nat_enabled = false
+      + enable_bgp                            = false
+      + generation                            = (known after apply)
+      + id                                    = (known after apply)
+      + ip_sec_replay_protection_enabled      = true
+      + location                              = "eastus2"
+      + name                                  = "fhi-dev-shared-hub-eastus2-expressroute-vng"
+      + remote_vnet_traffic_enabled           = true
+      + resource_group_name                   = "fhi-dev-shared-hub-rg"
+      + sku                                   = "ErGw1AZ"
+      + type                                  = "ExpressRoute"
+      + virtual_wan_traffic_enabled           = true
+      + vpn_type                              = "PolicyBased"
+
+      + bgp_settings (known after apply)
+
+      + ip_configuration {
+          + name                          = "default"
+          + private_ip_address_allocation = "Dynamic"
+          + public_ip_address_id          = (known after apply)
+          + subnet_id                     = "/subscriptions/430c39ac-9915-4597-a772-0ee872ebbc65/resourceGroups/fhi-dev-shared-hub-rg/providers/Microsoft.Network/virtualNetworks/fhi-dev-shared-hub-vnet/subnets/GatewaySubnet"
+        }
+    }
+
+  # module.express_route.azurerm_virtual_network_gateway.virtualnwg["fhi-dev-shared-hub-exr-vgw-dr"] will be created
+  + resource "azurerm_virtual_network_gateway" "virtualnwg" {
+      + active_active                         = false
+      + bgp_route_translation_for_nat_enabled = false
+      + enable_bgp                            = false
+      + generation                            = (known after apply)
+      + id                                    = (known after apply)
+      + ip_sec_replay_protection_enabled      = true
+      + location                              = "centralus"
+      + name                                  = "fhi-dev-shared-hub-exr-vgw-dr"
+      + remote_vnet_traffic_enabled           = true
+      + resource_group_name                   = "fhi-dev-shared-hubdr-rg"
+      + sku                                   = "ErGw1AZ"
+      + type                                  = "ExpressRoute"
+      + virtual_wan_traffic_enabled           = true
+      + vpn_type                              = "PolicyBased"
+
+      + bgp_settings (known after apply)
+
+      + ip_configuration {
+          + name                          = "default"
+          + private_ip_address_allocation = "Dynamic"
+          + public_ip_address_id          = (known after apply)
+          + subnet_id                     = "/subscriptions/430c39ac-9915-4597-a772-0ee872ebbc65/resourceGroups/fhi-dev-shared-hubdr-rg/providers/Microsoft.Network/virtualNetworks/fhi-dev-shared-hub-vnet-dr/subnets/GatewaySubnet"
+        }
+    }
+
+Plan: 9 to add, 0 to change, 0 to destroy.
